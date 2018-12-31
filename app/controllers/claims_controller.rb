@@ -25,15 +25,10 @@ class ClaimsController < ApplicationController
   # POST /claims.json
   def create
     @claim = Claim.new(claim_params)
-
-    respond_to do |format|
-      if @claim.save
-        format.html { redirect_to @claim, notice: 'Claim was successfully created.' }
-        format.json { render :show, status: :created, location: @claim }
-      else
-        format.html { render :new }
-        format.json { render json: @claim.errors, status: :unprocessable_entity }
-      end
+    if @claim.save
+      redirect_to claims_path, notice: "Claims Added Successfully"
+    else
+      redirect_to claims_path, notice: "Something went wrong :("
     end
   end
 
@@ -74,6 +69,6 @@ class ClaimsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def claim_params
-      params.require(:claim).permit(:claim_date, :pharmacy, :drug, :prescription_cost, :plan_paid, :patient_paid)
+      params.require(:claim).permit(:claim_date, :provider, :drug, :total_cost, :plan_paid, :patient_paid, :JSONInput)
     end
 end

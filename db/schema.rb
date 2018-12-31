@@ -10,17 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181231012846) do
+ActiveRecord::Schema.define(version: 20181231195847) do
 
   create_table "claims", force: :cascade do |t|
     t.string "claim_date"
-    t.string "pharmacy"
+    t.string "provider"
     t.string "drug"
-    t.string "prescription_cost"
+    t.string "total_cost"
     t.string "plan_paid"
     t.string "patient_paid"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "JSONInput"
   end
 
 end
