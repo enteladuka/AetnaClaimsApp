@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  claim_date: 2018-12-30
+  pharmacy: MyString
+  drug: MyString
+  prescription_cost: 9.99
+  plan_paid: 9.99
+  patient_paid: 9.99
+
+two:
+  claim_date: 2018-12-30
+  pharmacy: MyString
+  drug: MyString
+  prescription_cost: 9.99
+  plan_paid: 9.99
+  patient_paid: 9.99
