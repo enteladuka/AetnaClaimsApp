@@ -21,7 +21,7 @@ class ClaimsController < ApplicationController
   def import
     Claim.import(params[:file])
     if params[:file] == nil
-      flash[:warning] = "Please choose a file to continue"
+      flash[:danger] = "Please choose a file to continue"
       redirect_to new_claim_path
     else
       flash[:info] = "Thank you for your submission!"
