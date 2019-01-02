@@ -1,42 +1,10 @@
-<p id="notice"><%= notice %></p>
+<h3> Import Aetna Claims </h3>
+<hr>
 
-<h2> Thanks! </h2>
-
-<h1>Claims</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Claim date</th>
-      <th>Provider</th>
-      <th>Drug</th>
-      <th>Total</th>
-      <th>Plan paid</th>
-      <th>Patient paid</th>
-      <th>JSON</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @claims.each do |claim| %>
-      <tr>
-        <td><%= claim.claim_date %></td>
-        <td><%= claim.provider %></td>
-        <td><%= claim.drug %></td>
-        <td><%= claim.total_cost %></td>
-        <td><%= claim.plan_paid %></td>
-        <td><%= claim.patient_paid %></td>
-        <td><%= claim.JSONInput %></td>
-        <td><%= link_to 'Show', claim %></td>
-        <td><%= link_to 'Edit', edit_claim_path(claim) %></td>
-        <td><%= link_to 'Destroy', claim, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% flash.each do |message_type, message| %>
+    <div class="alert alert-<%= message_type %>"><%= message %></div>
+<% end %>
 
 <br>
 
-
-<!-- <%= link_to 'New Claim', new_claim_path %> -->
+<%= link_to 'Import Additional Claims', new_claim_path %>

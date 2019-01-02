@@ -1,18 +1,44 @@
 
-<h3> Import Claims </h3>
+  <% flash.each do |message_type, message| %>
+      <div class="alert alert-<%= message_type %>"><%= message %></div>
+  <% end %>
 
-<h4> Via Chrome Plugin <h4>
+  <h3> Import Aetna Claims </h3>
+  <hr>
 
+  <script>
+    function toggle_visibility(id) {
+     var e = document.getElementById(id);
+       if (e.style.display){
+       e.style.display = ((e.style.display!='none') ? 'none' : 'block');
+       }
+       else {e.style.display='block'}
+     }
+   </script>
 
-<h5> Copy and Paste Data Below
-<%= form_for(@claim, local: true) do |f| %>
-  <%= f.text_field :JSONInput, id: :claim_jsoninput %>
-  <%= f.submit 'Upload Claims'%>
-<% end %>
-
-<h4> Manual file upload <h4>
-
-<%= form_tag import_claims_path, multipart: true do %>
- <%= file_field_tag :file %>
- <%= submit_tag "Upload Claims" %>
-<% end %>
+  <h5> Copy and Paste data below:  </h5>
+  <%= form_for(@claim, local: true) do |f| %>
+    <div class="form-group">
+      <%= f.text_area :JSONInput, id: :claim_jsoninput, :rows => "200" %>
+    </div>
+    <div class="actions">
+      <%= f.submit 'Upload Claims', class: "btn btn-info btn-sm btn-block" %>
+    </div>
+  <% end %>
+  <hr>
+  <div class="hidden_section">
+    <a onclick="toggle_visibility('manual');" style="cursor:pointer;"><u>Import using CSV file</u></a>
+    <div id="manual" class="hidden">
+      <br>
+        <div class="form-group">
+          <%= form_tag import_claims_path, multipart: true, class: "btn btn-light btn-sm" do %>
+          <%= file_field_tag :file %>
+        </div>
+        <br>
+        <div class="actions">
+          <%= submit_tag "Upload Claims", class: "btn btn-info btn-sm btn-block" %>
+        </div>
+          <% end %>
+    </div>
+   </div>
+  </div>
