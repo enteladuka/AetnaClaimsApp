@@ -1,0 +1,32 @@
+#!/bin/bash
+
+set -e
+
+[ -n "$AZURE_SESSION" ] || script/azure_login
+
+BRANCH=`git rev-parse --abbrev-ref HEAD`
+REVISION=`git log --pretty=format:'%h' -n 1`
+TAG="$BRANCH-$REVISION"
+
+trap 'git checkout -- REVISION BRANCH' EXIT
+echo $REVISION > REVISION
+echo $BRANCH > BRANCH
+
+docker build -t aetnaclaimsapp:$TAG .
+docker tag aetnaclaimsapp:$TAG aetnaclaimsapp.azurecr.io/aetnaclaimsapp:$TAG
+docker push aetnaclaimsapp.azurecr.io/aetnaclaimsapp:$TAG
+
+echo "telling Azure to stage the new container"
+az webapp config container set \
+  --resource-group AetnaClaimsApp \
+  --name AetnaClaimsApp \
+  --docker-custom-image-name aetnaclaimsapp.azurecr.io/aetnaclaimsapp:$TAG \
+  > /dev/null
+
+echo -n "waiting for the new container to boot "
+until curl --max-time 30 --silent https://aetnaclaimsapp.azurewebsites.net/_ping | grep --quiet \"version\":\"$REVISION\"
+do
+  echo -n .
+  sleep 1
+done
+echo

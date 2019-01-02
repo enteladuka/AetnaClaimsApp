@@ -1,0 +1,28 @@
+#!/bin/bash
+
+az &> /dev/null
+if [ "$?" -eq 127 ]; then
+  echo "This script requires az. To install, type: brew intall az"
+  exit 1
+fi
+
+KEYCHAIN_ITEM="$USER@CMM/LDAP"
+LDAP_PASSWORD=$(security -q find-generic-password -wa $KEYCHAIN_ITEM)
+
+if [ -z "$LDAP_PASSWORD" ]; then
+  echo -n Your CMM LDAP password:
+  read -s LDAP_PASSWORD
+  echo
+  security -q add-generic-password -s "CMM LDAP" -a "$KEYCHAIN_ITEM" -w "$LDAP_PASSWORD"
+fi
+
+echo Logging into Azure
+
+# CLI auth
+az login --username $USER@covermymeds.com --password $LDAP_PASSWORD &> /dev/null \
+  || az login &> /dev/null
+
+az account set --subscription cmm-patient-prod
+
+# Docker repository auth
+az acr login --resource-group AetnaClaimsApp --name AetnaClaimsApp
