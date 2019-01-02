@@ -10,7 +10,7 @@ class ClaimsController < ApplicationController
   def create
     @claim = Claim.new(claim_params)
       if @claim.save
-      flash[:success] = "Claims Added Successfully"
+      flash[:info] = "Thank you for your submission!"
       redirect_to claims_path
       end
   end
@@ -18,10 +18,10 @@ class ClaimsController < ApplicationController
   def import
     Claim.import(params[:file])
     if params[:file] == nil
-      flash[:danger] = "Please choose a file to continue"
+      flash[:warning] = "Please choose a file to continue"
       redirect_to new_claim_path
     else
-      flash[:success] = "Claims Added Successfully"
+      flash[:info] = "Thank you for your submission!"
       redirect_to claims_path
     end
   end

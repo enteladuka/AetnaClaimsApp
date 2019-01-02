@@ -3,20 +3,10 @@
       <div class="alert alert-<%= message_type %>"><%= message %></div>
   <% end %>
 
-  <h3> Import Aetna Claims </h3>
+  <h3 style = "color:#E0004D; font-weight: 600"> Import Aetna Claims </h3>
   <hr>
 
-  <script>
-    function toggle_visibility(id) {
-     var e = document.getElementById(id);
-       if (e.style.display){
-       e.style.display = ((e.style.display!='none') ? 'none' : 'block');
-       }
-       else {e.style.display='block'}
-     }
-   </script>
-
-  <h5> Copy and Paste data below:  </h5>
+  <h5><small> Copy and Paste data below:</small></h5>
   <%= form_for(@claim, local: true) do |f| %>
     <div class="form-group">
       <%= f.text_area :JSONInput, id: :claim_jsoninput, :rows => "200" %>
@@ -26,19 +16,19 @@
     </div>
   <% end %>
   <hr>
+  <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+    Import using CSV file
+  </a>
   <div class="hidden_section">
-    <a onclick="toggle_visibility('manual');" style="cursor:pointer;"><u>Import using CSV file</u></a>
-    <div id="manual" class="hidden">
+    <div class="collapse" id="collapseExample">
+      <div class="form-group" class="form-group-custom">
+        <%= form_tag import_claims_path, multipart: true, class: "btn btn-light btn-sm" do %>
+        <%= file_field_tag :file %>
+      </div>
       <br>
-        <div class="form-group">
-          <%= form_tag import_claims_path, multipart: true, class: "btn btn-light btn-sm" do %>
-          <%= file_field_tag :file %>
-        </div>
-        <br>
-        <div class="actions">
-          <%= submit_tag "Upload Claims", class: "btn btn-info btn-sm btn-block" %>
-        </div>
-          <% end %>
+      <div class="actions">
+        <%= submit_tag "Upload Claims", class: "btn btn-info btn-sm btn-block" %>
+      </div>
+      <% end %>
     </div>
-   </div>
   </div>

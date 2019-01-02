@@ -14,34 +14,32 @@
  *= require_self
  */
 
+
  .bodyfont {
    height: 100%;
-   font-family: 'Lato', sans-serif;
+   font-family: 'Nunito Sans',sans-serif;
    align-items: center;
+   line-height: 21px;
  }
-
-.hidden {display:none;}
 
 .hidden_section {
   padding: 1em 0;
-}
-
-.hidden_section {
   text-align: center;
 }
 
 .container {
-	width: 100%;
+  max-width: 600px !important;
+  width: 80%;
   text-align: center;
-	max-width: 450px;
 	margin: 3em auto 0 auto;
 	border-radius: 15px;
 	box-shadow: 0 0 4px 4px rgba(0,0,0,.03);
-	padding: 1em 0;
+	padding: 2em 1em;
 }
 
 input[type="text"], textarea {
 	width: 100%;
+  font-size: 10pt !important;
 	margin: .5em 2% 1em 0;
 	display: inline-block;
 	outline: none;
