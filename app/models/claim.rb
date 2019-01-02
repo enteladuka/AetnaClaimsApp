@@ -1,4 +1,7 @@
 class Claim < ApplicationRecord
+
+validates :JSONInput, :Covered_entities, :Other_insurance, presence: true
+
 require 'csv'
   def self.import(file)
     unless file == nil

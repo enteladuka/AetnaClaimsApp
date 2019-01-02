@@ -22,6 +22,10 @@
    line-height: 21px;
  }
 
+.form-group{
+  font-size: 9pt !important;
+}
+
 .hidden_section {
   padding: 1em 0;
   text-align: center;

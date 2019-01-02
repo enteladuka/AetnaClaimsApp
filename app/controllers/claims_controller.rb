@@ -12,6 +12,9 @@ class ClaimsController < ApplicationController
       if @claim.save
       flash[:info] = "Thank you for your submission!"
       redirect_to claims_path
+      else
+      flash[:danger] = "Invalid form submission. Please complete all fields"
+      redirect_to new_claim_path
       end
   end
 
