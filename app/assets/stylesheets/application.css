@@ -31,18 +31,6 @@ span a,span a:visited {
   color: #343a40 !important;
 }
 
-span a, span a:visited {
-color: #343a40 !important;
-}
-/* ul.nav li a:hover, ul.nav li a:active {
-    color: #343a40 !important;
-}
-
-ul.nav li.active a {
-    color: #343a40 !important;
-} */
-
-
 .container {
   max-width: 600px !important;
   width: 80%;

@@ -1,6 +1,5 @@
 class Claim < ApplicationRecord
-  require 'csv'
-
+require 'csv'
   def self.import(file)
     unless file == nil
       CSV.foreach(file.path, headers: true) do |row|

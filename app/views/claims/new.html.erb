@@ -3,8 +3,22 @@
 <% end %>
 <h3 style = "color:#E0004D; font-weight: 600"> Import Aetna Claims </h3>
 <hr>
-<h5><small> Copy and Paste data below:</small></h5>
 <%= form_for(@claim, local: true) do |f| %>
+  <h5><small>Please select entities covered under this plan:</small></h5>
+  <div class="form-group" class="radio_button">
+    <%= f.radio_button :Covered_entities, 'Employee Only' %> Employee Only
+    <%= f.radio_button :Covered_entities, 'Employee+Spouse' %> Employee+Spouse
+    <%= f.radio_button :Covered_entities, 'Employee+Child' %> Employee+Child
+    <%= f.radio_button :Covered_entities, 'Family' %> Family
+  </div>
+  <hr>
+  <h5><small>Do you have any other form of medical/pharmacy insurance?</small></h5>
+  <div class="form-group" class="radio_button">
+    <%= f.radio_button :Other_insurance, '1' %> Yes
+    <%= f.radio_button :Other_insurance, '0' %> No
+  </div>
+  <hr>
+  <h5><small> Copy and Paste data below:</small></h5>
   <div class="form-group">
     <%= f.text_area :JSONInput, id: :claim_jsoninput, :rows => "200" %>
   </div>

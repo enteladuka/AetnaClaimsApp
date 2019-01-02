@@ -28,6 +28,6 @@ class ClaimsController < ApplicationController
 
   private
     def claim_params
-      params.require(:claim).permit(:claim_date, :provider, :drug, :total_cost, :plan_paid, :patient_paid, :JSONInput)
+      params.require(:claim).permit(:claim_date, :provider, :drug, :total_cost, :plan_paid, :patient_paid, :JSONInput, :Other_insurance, :Covered_entities)
     end
 end

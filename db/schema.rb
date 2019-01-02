@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181231195847) do
+ActiveRecord::Schema.define(version: 20190102071434) do
 
   create_table "claims", force: :cascade do |t|
     t.string "claim_date"
@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(version: 20181231195847) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "JSONInput"
+    t.string "Covered_entities"
+    t.integer "Other_insurance"
   end
 
 end
