@@ -13,7 +13,7 @@ class ClaimsController < ApplicationController
       flash[:info] = "Thank you for your submission!"
       redirect_to claims_path
       else
-      flash[:danger] = "Invalid form submission. Please complete all fields"
+      flash[:danger] = @claim.errors.full_messages
       redirect_to new_claim_path
       end
   end

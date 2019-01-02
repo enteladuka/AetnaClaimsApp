@@ -1,8 +1,11 @@
 class Claim < ApplicationRecord
 
-validates :JSONInput, :Covered_entities, :Other_insurance, presence: true
+  validates :Covered_entities, :Other_insurance, presence: true
+  validate :isJSON
 
-require 'csv'
+
+
+  require 'csv'
   def self.import(file)
     unless file == nil
       CSV.foreach(file.path, headers: true) do |row|
@@ -18,5 +21,13 @@ require 'csv'
         Claim.create(:claim_date => row["Date"], :provider => provider, :drug => row["Drug Name"], :total_cost => cost, :plan_paid => row["Plan Paid"], :patient_paid => row["Your Responsibility"])
       end
     end
+  end
+
+  private
+
+  def isJSON
+    JSON.parse(self.JSONInput)
+  rescue JSON::ParserError
+    errors.add(:base, 'Data input is invalid. Please select all data and copy before pasting.')
   end
 end

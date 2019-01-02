@@ -1,6 +1,9 @@
-<% flash.each do |message_type, message| %>
+<% flash.each do |message_type, messages| %>
+  <% messages.each do |message| %>
     <div class="alert alert-<%= message_type %>"><%= message %></div>
+  <% end %>
 <% end %>
+
 <h3 style = "color:#E0004D; font-weight: 600"> Import Aetna Claims </h3>
 <hr>
 <%= form_for(@claim, local: true) do |f| %>
@@ -9,7 +12,7 @@
     <%= f.radio_button :Covered_entities, 'Employee Only' %> Employee Only &nbsp;
     <%= f.radio_button :Covered_entities, 'Employee+Spouse' %> Employee+Spouse &nbsp;
     <%= f.radio_button :Covered_entities, 'Employee+Child' %> Employee+Child &nbsp;
-    <%= f.radio_button :Covered_entities, 'Family' %> Family
+    <%= f.radio_button :Covered_entities, 'Family' %> Employee+Spouse+Child(ren)
   </div>
   <hr>
   <h5><small>Do you have any other form of medical/pharmacy insurance?</small></h5>
